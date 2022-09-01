@@ -21,7 +21,6 @@ const controlRecipes = async function () {
 
     // 1) Loading recipe
     await model.loadRecipe(id);
-    // const { recipe } = model.state;
 
     // 2) Rendering recipe
     reciepeView.render(model.state.recipe);
@@ -42,8 +41,6 @@ const controlSearchResults = async function () {
     await model.loadSearchResults(query);
 
     // 3) Render results
-    // console.log(model.state.search.results);
-    // resultsView.render(model.state.search.results);
     resultsView.render(model.getSearchResultsPage());
 
     // 4) Render pagination buttons
