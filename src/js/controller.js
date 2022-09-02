@@ -3,6 +3,7 @@ import { async } from 'regenerator-runtime';
 import 'regenerator-runtime/runtime'; // Polyfiling others
 
 import * as model from './model';
+import { MODAL_CLOSE_SEC } from './config.js';
 import recipeView from './views/recipeView';
 import searchView from './views/searchView';
 import resultsView from './views/resultsView';
@@ -93,8 +94,25 @@ const controlBookmarks = function () {
 
 const controlAddRecipe = async function (newRecipe) {
   try {
+    // show loading spinner
+    addRecipeView.renderSpinner();
+
     // upload the new recipe data
     await model.uploadRecipe(newRecipe);
+
+    // render recipe
+    recipeView.render(model.state.recipe);
+
+    // show success message
+    addRecipeView.renderMessage();
+
+    // render bookmark view
+    bookmarksView.render(model.state.bookmarks);
+
+    // close modal-form window
+    setTimeout(function () {
+      addRecipeView.toggleWindow();
+    }, MODAL_CLOSE_SEC * 1000);
   } catch (err) {
     console.error(` 💥💥💥 ${err}`);
     addRecipeView.renderError(err.message);
