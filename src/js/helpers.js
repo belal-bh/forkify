@@ -9,6 +9,37 @@ export const timeout = function (s) {
   });
 };
 
+const getGCD = function (a, b) {
+  return b == 0 ? a : getGCD(b, a % b);
+};
+
+export const getFraction = function (num) {
+  if (typeof num !== 'number') {
+    num = Number.parseFloat(num);
+  }
+
+  if (!Number.isFinite(num)) return NaN;
+
+  let wholePart, numerator, denominator; // format: a b/c
+  wholePart = Math.trunc(num);
+
+  const decimalPart = num - wholePart;
+  denominator = 100;
+  numerator = Math.trunc(decimalPart * denominator);
+
+  const gcd = getGCD(numerator, denominator);
+  numerator = Math.trunc(numerator / gcd);
+  denominator = Math.trunc(denominator / gcd);
+
+  const result = [];
+  if (wholePart != 0) result.push(wholePart);
+  if (numerator != 0)
+    result.push(
+      (wholePart === 0 ? numerator : Math.abs(numerator)) + '/' + denominator
+    );
+  return result.length > 0 ? result.join(' ') : 0;
+};
+
 export const AJAX = async function (url, uploadData = undefined) {
   try {
     const res = await Promise.race([
