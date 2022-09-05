@@ -11,8 +11,6 @@ import paginationView from './views/paginationView';
 import bookmarksView from './views/bookmarksView';
 import addRecipeView from './views/addRecipeView';
 
-import { getFraction } from './helpers';
-
 // if (module.hot) {
 //   module.hot.accept();
 // }
@@ -132,8 +130,6 @@ const init = function () {
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
   addRecipeView.addHandlerUpload(controlAddRecipe);
-
-  // console.log(getFraction(1.5));
 };
 
 init();

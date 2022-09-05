@@ -2,7 +2,6 @@ import View from './View.js';
 
 // import icons from '../../img/icons.svg'; // Parcel 1
 import icons from 'url:../../img/icons.svg'; // Parcel 2
-import { Fraction } from 'fractional';
 import { getFraction } from './../helpers';
 
 class RecipeView extends View {
@@ -148,7 +147,6 @@ class RecipeView extends View {
             <use href="${icons}#icon-check"></use>
         </svg>
         <div class="recipe__quantity">${
-          // ing.quantity ? new Fraction(ing.quantity.toFixed(2)).toString() : ''
           ing.quantity ? getFraction(ing.quantity.toFixed(2)) : ''
         }</div>
         <div class="recipe__description">
